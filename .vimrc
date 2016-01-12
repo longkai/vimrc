@@ -110,6 +110,12 @@ endif
 autocmd InsertEnter * set timeoutlen=200
 autocmd InsertLeave * set timeoutlen=1000
 
+" nerd tree
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
 " delimitMate
 let delimitMate_expand_cr=1
 
@@ -134,6 +140,40 @@ let g:user_emmet_expandabbr_key = '<Tab>'
 let g:user_emmet_mode = 'n'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall      " only enable in html and css
+
+" tagbar
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:go_auto_type_info=1
+if get(g:, "go_auto_type_info", 0)
+  setlocal updatetime=250
+endif
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
 " ctrlp
 let g:ctrlp_working_path_mode = 'ra'
