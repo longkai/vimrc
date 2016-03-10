@@ -127,6 +127,8 @@ let g:airline_powerline_fonts = 1
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_conceal = 0
 
 " go-vim
 let g:go_highlight_functions = 1
