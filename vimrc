@@ -16,6 +16,7 @@ Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/majutsushi/tagbar.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/bling/vim-airline.git'
+Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/Raimondi/delimitMate'
@@ -195,3 +196,4 @@ let g:ctrlp_custom_ignore = {
 "let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
+
