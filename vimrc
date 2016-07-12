@@ -45,6 +45,8 @@ colorscheme solarized
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 map v dwelp
 
+set dir=~/var/vim " tell vim where to put swap files
+
 " golang
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
