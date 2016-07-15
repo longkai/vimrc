@@ -1,8 +1,6 @@
 lightweight vimrc
 ===
-A lightweight c/go/markdown/etc. vim configuration file.
-
-It use the [Plug][1] as the plugin manager tool.
+A lightweight c/go/markdown configuration file of vim which take the [Plug][1] as its plugin manager tool.
 
 Using it, soft linking file ``vimrc`` as ``~/.vimrc``. 
 
@@ -10,9 +8,8 @@ Using it, soft linking file ``vimrc`` as ``~/.vimrc``.
 $ ln -s path/to/repo/vimrc ~/.vimrc
 ```
 
-Note: this is a **self used primarily**. If you get insterest with some of these plugins, you should **check every plugin's** pre-requirement.
+Note: this is **self used only**. If you get insterested with some of these plugins, you should **check the plugin's** pre-requirement.
 
-Plugins used:
 ```viml
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/tomtom/tcomment_vim'
