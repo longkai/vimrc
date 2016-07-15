@@ -10,7 +10,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
-Plug 'https://github.com/tomtom/tcomment_vim'
 Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/Raimondi/delimitMate'
@@ -19,10 +18,9 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/vim-jp/vim-go-extra'
-"Plug 'https://github.com/tpope/vim-surround.git'
-"Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/rizzatti/dash.vim'
+Plug 'https://github.com/Valloric/YouCompleteMe.git'
 call plug#end()
 
 " self defined config
