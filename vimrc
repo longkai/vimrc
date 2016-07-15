@@ -43,20 +43,22 @@ set completeopt=longest,menuone
 colorscheme solarized
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
-map v dwelp
+map v dwelp " swap two words
+map , A;<ESC><CR> " insert semicolon at the end
 
 set dir=~/var/vim " tell vim where to put swap files
+
+" run simple c program
+autocmd FileType c nmap <F10> :!clang % && ./a.out && rm -f ./a.out<CR>
 
 " golang
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
+autocmd FileType go nmap <F10> :!go run %<CR>
 
 filetype plugin indent on
 syntax on
-
-" semicolon
-map , A;<ESC><CR>
 
 " Switch windows via Ctrl-<h,j,k,l> instead of Ctrl-W,<h,j,k,l>
 nnoremap <C-J> <C-W>j
