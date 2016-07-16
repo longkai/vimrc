@@ -18,7 +18,7 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-Plug 'https://github.com/vim-jp/vim-go-extra'
+Plug 'https://github.com/longkai/vimrc'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 call plug#end()
@@ -121,9 +121,20 @@ let delimitMate_expand_cr = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " tagbar
-let g:tagbar_width = 24   
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags locations
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 24   
+
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags locations
+
+    if !executable('/usr/local/bin/ctags')
+      silent !brew install ctags
+    endif
+  endif
+endif
+
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
