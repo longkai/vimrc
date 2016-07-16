@@ -21,6 +21,10 @@ Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'https://github.com/longkai/vimrc'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
+
+if empty(glob('$VIM/runtime/syntax/go.vim'))
+  Plug 'https://github.com/google/vim-ft-go' " see its doc
+endif
 call plug#end()
 
 " self defined config
