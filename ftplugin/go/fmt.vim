@@ -24,16 +24,16 @@
 "
 
 " check desired gotool bins before we move on
-if empty(glob('$GOPATH/src/golang.org/x/tools'))
-  silent !git clone https://github.com/golang/tools.git $GOPATH/src/golang.org/x/tools && go install golang.org/x/tools/cmd/goimports
+if !executable('goimports')
+    silent !git clone https://github.com/golang/tools.git $GOPATH/src/golang.org/x/tools && go install golang.org/x/tools/cmd/goimports;
 endif
 
-if empty(glob('$GOPATH/src/github.com/golang/lint'))
-  silent !go get https://github.com/golang/lint
+if !executable('golint')
+  silent !go get -u github.com/golang/lint/golint
 endif
 
 if !executable('gotags')
-  silent !go get github.com/jstemmer/gotags
+    silent !go -u get github.com/jstemmer/gotags
 endif
 " end check
 

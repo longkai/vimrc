@@ -9,6 +9,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+if empty(glob('$VIM/runtime/syntax/go.vim'))
+  Plug 'https://github.com/google/vim-ft-go' " see its doc
+endif
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/majutsushi/tagbar'
@@ -21,10 +24,6 @@ Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 Plug 'https://github.com/longkai/vimrc'
 Plug 'https://github.com/rizzatti/dash.vim'
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
-
-if empty(glob('$VIM/runtime/syntax/go.vim'))
-  Plug 'https://github.com/google/vim-ft-go' " see its doc
-endif
 call plug#end()
 
 " self defined config
@@ -126,18 +125,23 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
-let g:tagbar_width = 24   
+let g:tagbar_width = 24
 
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
-    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags locations
-
     if !executable('/usr/local/bin/ctags')
       silent !brew install ctags
     endif
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags in mac
+  else
+    if !executable('/usr/bin/ctags')
+      silent !sudo yum install -y ctags
+    endif
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'  " Proper Ctags in non-mac unix env
   endif
 endif
+
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
