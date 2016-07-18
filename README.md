@@ -2,13 +2,13 @@ lightweight vimrc
 ===
 A lightweight c/go/markdown configuration file for vim.
 
-Using it, soft linking file ``vimrc`` to``~/.vimrc``. 
+Using it, soft linking file ``vimrc`` to ``~/.vimrc``. 
 
 ```sh
 $ ln -s path/to/repo/vimrc ~/.vimrc
 ```
 
-Note: this is **self used only**. If you get insterested with some of these plugins, you should **check their docs**.
+Note: this is **self used only**. If you get interested with some of these plugins, you should **check their docs**.
 
 ```viml
 Plug 'https://github.com/altercation/vim-colors-solarized.git'

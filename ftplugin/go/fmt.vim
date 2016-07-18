@@ -33,7 +33,7 @@ if !executable('golint')
 endif
 
 if !executable('gotags')
-    silent !go -u get github.com/jstemmer/gotags
+    silent !go get -u github.com/jstemmer/gotags
 endif
 " end check
 

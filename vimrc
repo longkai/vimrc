@@ -30,6 +30,7 @@ call plug#end()
 set nocompatible
 set rnu
 set nu
+set spell
 set tabstop=2
 set shiftwidth=2
 set expandtab
