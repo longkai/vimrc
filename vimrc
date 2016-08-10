@@ -21,9 +21,17 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-Plug 'https://github.com/longkai/vimrc'
-Plug 'https://github.com/rizzatti/dash.vim'
-Plug 'https://github.com/Valloric/YouCompleteMe.git'
+
+"only mac has rich feature, i.e. development
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    Plug 'https://github.com/longkai/vimrc'
+    Plug 'https://github.com/rizzatti/dash.vim'
+    Plug 'https://github.com/Valloric/YouCompleteMe.git'
+    Plug 'https://github.com/wannesm/wmgraphviz.vim'
+  endif
+endif
 call plug#end()
 
 " self defined config
