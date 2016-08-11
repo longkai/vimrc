@@ -5,7 +5,7 @@ endif
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -14,7 +14,6 @@ if empty(glob('$VIM/runtime/syntax/go.vim'))
 endif
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/Raimondi/delimitMate'
 Plug 'https://github.com/Yggdroot/indentLine.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
@@ -26,6 +25,7 @@ Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
+    Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/longkai/vimrc'
     Plug 'https://github.com/rizzatti/dash.vim'
     Plug 'https://github.com/Valloric/YouCompleteMe.git'
@@ -50,7 +50,7 @@ set cursorline
 set ignorecase
 set autoread
 set completeopt=longest,menuone
-colorscheme solarized
+silent! colorscheme solarized
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 map v dwelp " swap two words
@@ -144,10 +144,11 @@ if has("unix")
     endif
     let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags in mac
   else
-    if !executable('/usr/bin/ctags')
-      silent !sudo yum install -y ctags
-    endif
-    let g:tagbar_ctags_bin = '/usr/bin/ctags'  " Proper Ctags in non-mac unix env
+    " only mac development env needs it
+    " if !executable('/usr/bin/ctags')
+    "   silent !sudo yum install -y ctags
+    " endif
+    " let g:tagbar_ctags_bin = '/usr/bin/ctags'  " Proper Ctags in non-mac unix env
   endif
 endif
 
