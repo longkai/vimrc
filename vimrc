@@ -25,6 +25,7 @@ Plug 'https://github.com/vim-airline/vim-airline-themes.git'
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
+    Plug 'https://github.com/mattn/emmet-vim.git'
     Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/longkai/vimrc'
     Plug 'https://github.com/rizzatti/dash.vim'
@@ -61,11 +62,16 @@ set dir=~/var/vim " tell vim where to put swap files
 " run simple c program
 autocmd FileType c nmap <F10> :!clang % && ./a.out && rm -f ./a.out<CR>
 
-" golang
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-autocmd FileType go nmap <F10> :!go run %<CR>
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    " golang
+    set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+    autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+    autocmd FileType go nmap <F10> :!go run %<CR>
+  endif
+endif
 
 filetype plugin indent on
 syntax on
