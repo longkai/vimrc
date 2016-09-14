@@ -36,10 +36,9 @@ endif
 call plug#end()
 
 " self defined config
-set nocompatible
-set rnu
+"set nocompatible
 set nu
-set spell
+set rnu
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -52,10 +51,15 @@ set ignorecase
 set autoread
 set completeopt=longest,menuone
 silent! colorscheme solarized
-
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
+" for vim8
+if v:version >= 800 
+  set breakindent
+  set emoji
+endif
+
 map v dwelp " swap two words
-map , A;<ESC><CR> " insert semicolon at the end
 
 set dir=~/var/vim " tell vim where to put swap files
 
@@ -104,6 +108,16 @@ autocmd BufReadPost *
 if has('gui_running')
   set guifont=Hack:h16
   set lines=30 columns=100
+endif
+
+if has("multi_byte")
+	set encoding=utf-8
+	set termencoding=utf-8
+	set formatoptions+=mM
+	set fencs=utf-8
+	if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
+		set ambiwidth=double
+	endif
 endif
 
 " nerd tree
