@@ -20,17 +20,17 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+Plug 'https://github.com/bumaociyuan/vim-swift'
 
 "only mac has rich feature, i.e. development
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
-    Plug 'https://github.com/mattn/emmet-vim.git'
-    Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/longkai/vimrc'
-    Plug 'https://github.com/rizzatti/dash.vim'
-    Plug 'https://github.com/Valloric/YouCompleteMe.git'
+    Plug 'https://github.com/majutsushi/tagbar'
+    Plug 'https://github.com/mattn/emmet-vim.git'
     Plug 'https://github.com/wannesm/wmgraphviz.vim'
+    Plug 'https://github.com/Valloric/YouCompleteMe.git'
   endif
 endif
 call plug#end()
@@ -106,7 +106,9 @@ autocmd BufReadPost *
   \ endif
 
 if has('gui_running')
+  set macligatures
   set guifont=Hack:h16
+  "set guifont=Fira\ Code:h16
   set lines=30 columns=100
 endif
 
@@ -134,6 +136,7 @@ let g:airline_powerline_fonts = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_math = 1
 
 " emmet
 let g:user_emmet_expandabbr_key = '<Tab>'
