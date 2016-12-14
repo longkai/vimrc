@@ -64,7 +64,7 @@ map v dwelp " swap two words
 set dir=~/var/vim " tell vim where to put swap files
 
 " run simple c program
-autocmd FileType c nmap <F10> :!clang % && ./a.out && rm -f ./a.out<CR>
+autocmd FileType c nmap <F10> :!f=`mktemp`; clang -o $f % && $f<CR>
 
 if has("unix")
   let s:uname = system("uname -s")
@@ -154,6 +154,7 @@ let delimitMate_expand_cr = 1
 
 " ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_filetype_blacklist = { 'swift': 1 }
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
