@@ -63,9 +63,6 @@ map v dwelp " swap two words
 
 set dir=~/var/vim " tell vim where to put swap files
 
-" run simple c program
-autocmd FileType c nmap <F10> :!f=`mktemp`; clang -o $f % && $f<CR>
-
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
@@ -73,9 +70,18 @@ if has("unix")
     set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
     autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
-    autocmd FileType go nmap <F10> :!go run %<CR>
   endif
 endif
+
+" run simple go programs
+autocmd FileType go nmap <F9>:!go test<CR>
+autocmd FileType go nmap <F10>:!go run %<CR>
+
+" run simple c programs
+autocmd FileType c nmap <F10>:!f=`mktemp`; clang -o $f % && $f<CR>
+
+" run simple swift programs
+autocmd FileType swift nmap <F10>:!swift %<CR>
 
 filetype plugin indent on
 syntax on
