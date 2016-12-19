@@ -74,14 +74,23 @@ if has("unix")
 endif
 
 " run simple go programs
-autocmd FileType go nmap <F9>:!go test<CR>
-autocmd FileType go nmap <F10>:!go run %<CR>
+autocmd FileType go nmap <F9> :!go test<CR>
+autocmd FileType go nmap <F10> :!go run %<CR>
 
 " run simple c programs
-autocmd FileType c nmap <F10>:!f=`mktemp`; clang -o $f % && $f<CR>
+autocmd FileType c nmap <F10> :!f=`mktemp`; clang -o $f % && $f<CR>
 
 " run simple swift programs
-autocmd FileType swift nmap <F10>:!swift %<CR>
+autocmd FileType swift nmap <F10> :!swift %<CR>
+
+map <C-I> :pyf ~/bin/clang-format.py<CR>
+imap <C-I> <c-o> :pyf ~/bin/clang-format.py<CR>
+"Todo: auto exec on buffer saved
+function FormatFile()
+  let l:lines="all"
+  pyf ~/bin/clang-format.py
+endfunction
+nmap <F12> :call FormatFile()<CR>
 
 filetype plugin indent on
 syntax on
