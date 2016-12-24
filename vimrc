@@ -49,6 +49,12 @@ set laststatus=2
 set cursorline
 set ignorecase
 set autoread
+set hlsearch
+set incsearch
+
+set mps+=<:>
+au FileType c,cpp,java,go,swift set mps+==:;
+
 set completeopt=longest,menuone
 silent! colorscheme solarized
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -59,7 +65,9 @@ if v:version >= 800
   set emoji
 endif
 
+" customized key binding
 map v dwelp " swap two words
+noremap % v%
 
 set dir=~/var/vim " tell vim where to put swap files
 
@@ -86,11 +94,11 @@ autocmd FileType swift nmap <F10> :!swift %<CR>
 map <C-I> :pyf ~/bin/clang-format.py<CR>
 imap <C-I> <c-o> :pyf ~/bin/clang-format.py<CR>
 "Todo: auto exec on buffer saved
-function FormatFile()
+function! ClangFormatFile()
   let l:lines="all"
   pyf ~/bin/clang-format.py
 endfunction
-nmap <F12> :call FormatFile()<CR>
+nmap <F12> :call ClangFormatFile()<CR>
 
 filetype plugin indent on
 syntax on
@@ -101,6 +109,15 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
 
+ca tn tabnew
+" CTRL-Tab is next tab
+noremap <C-Tab> :<C-U>tabnext<CR>
+inoremap <C-Tab> <C-\><C-N>:tabnext<CR>
+cnoremap <C-Tab> <C-C>:tabnext<CR>
+" CTRL-SHIFT-Tab is previous tab
+noremap <C-S-Tab> :<C-U>tabprevious<CR>
+inoremap <C-S-Tab> <C-\><C-N>:tabprevious<CR>
+cnoremap <C-S-Tab> <C-C>:tabprevious<CR>
 " Tabs for mac users (using the 'apple' key)
 nnoremap <D-S-]> gt
 nnoremap <D-S-[> gT
@@ -138,13 +155,17 @@ if has("multi_byte")
 endif
 
 " nerd tree
-let NERDTreeShowLineNumbers=1 " enable line numbers
-map <C-n> :NERDTreeToggle<CR>
-autocmd FileType nerdtree setlocal relativenumber " make sure relative line numbers are used
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " airline
+"let g:airline_theme = 'solarized'
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#buffer_nr_show = 0
 let g:airline_powerline_fonts = 1
 
 " markdown
@@ -172,18 +193,18 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd
 let g:ycm_filetype_blacklist = { 'swift': 1 }
 
 " tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <F3> :TagbarToggle<CR>
 let g:tagbar_width = 24
 
 if has("unix")
   let s:uname = system("uname -s")
+  " only mac development env needs it
   if s:uname == "Darwin\n"
     if !executable('/usr/local/bin/ctags')
       silent !brew install ctags
     endif
     let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags in mac
   else
-    " only mac development env needs it
     " if !executable('/usr/bin/ctags')
     "   silent !sudo yum install -y ctags
     " endif
