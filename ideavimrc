@@ -2,6 +2,8 @@ set nu
 set rnu
 set hlsearch
 set incsearch
+set ignorecase
+set smartcase
 set nrformats
 
 set mps+=<:>

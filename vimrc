@@ -47,8 +47,9 @@ set smarttab
 set background=dark
 set laststatus=2
 set cursorline
-set ignorecase
 set autoread
+set ignorecase
+set smartcase
 set hlsearch
 set incsearch
 
