@@ -53,8 +53,12 @@ set smartcase
 set hlsearch
 set incsearch
 
+
+filetype plugin indent on
+syntax on
+
 set mps+=<:>
-au FileType c,cpp,java,go,swift set mps+==:;
+au FileType c,cpp,objc,java set mps+==:;
 
 set completeopt=longest,menuone
 silent! colorscheme solarized
@@ -92,17 +96,8 @@ autocmd FileType c nmap <F10> :!f=`mktemp`; clang -o $f % && $f<CR>
 " run simple swift programs
 autocmd FileType swift nmap <F10> :!swift %<CR>
 
-map <C-I> :pyf ~/bin/clang-format.py<CR>
-imap <C-I> <c-o> :pyf ~/bin/clang-format.py<CR>
-"Todo: auto exec on buffer saved
-function! ClangFormatFile()
-  let l:lines="all"
-  pyf ~/bin/clang-format.py
-endfunction
-nmap <F12> :call ClangFormatFile()<CR>
-
-filetype plugin indent on
-syntax on
+nmap <F12> gg=G<CR>
+autocmd FileType c,cpp,objc,java,javascript,proto setlocal equalprg=clang-format
 
 " Switch windows via Ctrl-<h,j,k,l> instead of Ctrl-W,<h,j,k,l>
 nnoremap <C-J> <C-W>j

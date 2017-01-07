@@ -7,6 +7,6 @@ set smartcase
 set nrformats
 
 set mps+=<:>
-au FileType c,cpp,java,go,swift set mps+==:;
+au FileType c,cpp,objc,java set mps+==:;
 
 noremap % v%
