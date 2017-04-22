@@ -128,6 +128,22 @@ nnoremap <D-8> 8gt
 nnoremap <D-9> 9gt
 nnoremap <D-0> :tablast<CR>
 
+" In insert mode, Emacs style
+inoremap <C-b> <Left>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+inoremap <C-f> <Right>
+inoremap <C-e> <Esc>A
+inoremap <C-a> <Esc>I
+inoremap <A-b> <Esc>bi
+inoremap <A-f> <Esc>ea
+
+inoremap ∫ <Esc>bi
+inoremap ƒ <Esc>ea
+
+inoremap <C-d> <Esc>xi
+inoremap <C-k> <Esc>d$a
+
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
   \     exe "normal! g`\"" |

@@ -10,3 +10,17 @@ set mps+=<:>
 au FileType c,cpp,objc,java set mps+==:;
 
 noremap % v%
+
+" In insert mode, Emacs style
+inoremap <C-b> <Left>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+inoremap <C-f> <Right>
+inoremap <C-e> <Esc>A
+inoremap <C-a> <Esc>I
+inoremap <A-b> <Esc>bi
+inoremap <A-f> <Esc>ea
+
+inoremap <C-d> <Esc>lxi
+inoremap <C-k> <Esc>ld$a
+
