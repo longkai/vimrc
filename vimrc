@@ -20,23 +20,27 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/plasticboy/vim-markdown.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/vim-airline/vim-airline-themes.git'
-Plug 'https://github.com/bumaociyuan/vim-swift'
+"Plug 'https://github.com/bumaociyuan/vim-swift'
+"Plug 'https://github.com/jceb/vim-orgmode'
+"Plug 'https://github.com/tpope/vim-speeddating'
+"Plug 'https://github.com/udalov/kotlin-vim'
+"Plug 'https://github.com/w0rp/ale.git'
 
 "only mac has rich feature, i.e. development
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
     Plug 'https://github.com/longkai/vimrc'
-    Plug 'https://github.com/majutsushi/tagbar'
+    "Plug 'https://github.com/majutsushi/tagbar'
     Plug 'https://github.com/mattn/emmet-vim.git'
-    Plug 'https://github.com/wannesm/wmgraphviz.vim'
-    Plug 'https://github.com/Valloric/YouCompleteMe.git'
+    "Plug 'https://github.com/wannesm/wmgraphviz.vim'
+    "Plug 'https://github.com/Valloric/YouCompleteMe.git'
   endif
 endif
 call plug#end()
 
 " self defined config
-"set nocompatible
+set nocompatible
 set nu
 set rnu
 set tabstop=2
@@ -57,7 +61,6 @@ set incsearch
 filetype plugin indent on
 syntax on
 
-set mps+=<:>
 au FileType c,cpp,objc,java set mps+==:;
 
 set completeopt=longest,menuone
@@ -128,6 +131,19 @@ nnoremap <D-8> 8gt
 nnoremap <D-9> 9gt
 nnoremap <D-0> :tablast<CR>
 
+inoremap <D-S-]> <C-\><C-N>gt
+inoremap <D-S-[> <C-\><C-N>gT
+inoremap <D-1> <C-\><C-N>1gt
+inoremap <D-2> <C-\><C-N>2gt
+inoremap <D-3> <C-\><C-N>3gt
+inoremap <D-4> <C-\><C-N>4gt
+inoremap <D-5> <C-\><C-N>5gt
+inoremap <D-6> <C-\><C-N>6gt
+inoremap <D-7> <C-\><C-N>7gt
+inoremap <D-8> <C-\><C-N>8gt
+inoremap <D-9> <C-\><C-N>9gt
+inoremap <D-0> <C-\><C-N>:tablast<CR>
+
 " In insert mode, Emacs style
 inoremap <C-b> <Left>
 inoremap <C-n> <Down>
@@ -140,9 +156,12 @@ inoremap <A-f> <Esc>ea
 
 inoremap ∫ <Esc>bi
 inoremap ƒ <Esc>ea
+inoremap <C-l> <Esc>zz
 
-inoremap <C-d> <Esc>xi
-inoremap <C-k> <Esc>d$a
+inoremap <C-d> <C-O>s
+inoremap <C-k> <C-O>D
+inoremap <A-d> <C-O>ce
+inoremap <C-y> <Esc>pa
 
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -152,7 +171,6 @@ autocmd BufReadPost *
 if has('gui_running')
   set macligatures
   set guifont=Hack:h16
-  "set guifont=Fira\ Code:h16
   set lines=30 columns=100
 endif
 
@@ -175,9 +193,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " airline
 "let g:airline_theme = 'solarized'
 let g:airline_theme = 'bubblegum'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#buffer_nr_show = 0
+if !has('gui_running')
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#tab_nr_type = 1
+  let g:airline#extensions#tabline#buffer_nr_show = 0
+endif
+
 let g:airline_powerline_fonts = 1
 
 " markdown
@@ -201,55 +222,9 @@ let g:gitgutter_highlight_lines = 1
 let delimitMate_expand_cr = 1
 
 " ycm
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_filetype_blacklist = { 'swift': 1 }
 
 " tagbar
 nmap <F3> :TagbarToggle<CR>
 let g:tagbar_width = 24
-
-if has("unix")
-  let s:uname = system("uname -s")
-  " only mac development env needs it
-  if s:uname == "Darwin\n"
-    if !executable('/usr/local/bin/ctags')
-      silent !brew install ctags
-    endif
-    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'  " Proper Ctags in mac
-  else
-    " if !executable('/usr/bin/ctags')
-    "   silent !sudo yum install -y ctags
-    " endif
-    " let g:tagbar_ctags_bin = '/usr/bin/ctags'  " Proper Ctags in non-mac unix env
-  endif
-endif
-
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-

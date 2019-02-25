@@ -21,6 +21,8 @@ inoremap <C-a> <Esc>I
 inoremap <A-b> <Esc>bi
 inoremap <A-f> <Esc>ea
 
-inoremap <C-d> <Esc>lxi
-inoremap <C-k> <Esc>ld$a
+inoremap <C-d> <C-O>s
+inoremap <C-k> <C-O>D
+inoremap <A-d> <C-O>ce
+inoremap <C-y> <Esc>pa
 
